@@ -1,6 +1,8 @@
 package models
 
 import (
+	"Blog/helpers"
+
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
@@ -12,6 +14,11 @@ type (
 		Nickname string `json:"nickname" gorm:"not null"`
 		Password string `json:"password" gorm:"not null"`
 		Token string `json:"-" gorm:"type:text"`
+	}
+
+	LoginUsers struct{
+		Email string `json:"email"`
+		Password string `json:"password"`
 	}
 )
 
@@ -28,4 +35,34 @@ func (user *User) SaveUser(db *gorm.DB) (*User, error) {
         return &User{}, err
     }
     return user, nil
+}
+
+func VerifyPassword(password, hashedPassword string) error {
+    return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+}
+
+func (user *User) LoginCheck(email string, password string, db *gorm.DB) (string, User, error) {
+    var err error
+
+    u := User{}
+
+    err = db.Model(User{}).Where("email = ?", email).Take(&u).Error
+
+    if err != nil {
+        return "",u, err
+    }
+
+    err = VerifyPassword(password, u.Password)
+
+    if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
+        return "",u, err
+    }
+
+    token, err := helpers.GenerateToken(uint(u.ID))
+
+    if err != nil {
+        return "", u,err
+    }
+
+    return token,u, nil
 }
