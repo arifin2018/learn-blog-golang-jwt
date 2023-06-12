@@ -1,6 +1,7 @@
 package config
 
 import (
+	"Blog/models"
 	"fmt"
 
 	"gorm.io/driver/mysql"
@@ -21,7 +22,7 @@ func ConnectDB() *gorm.DB {
 		panic(err.Error())
 	}
 
-	db.AutoMigrate()
+	db.AutoMigrate(&models.User{})
 
 	return db
 }
