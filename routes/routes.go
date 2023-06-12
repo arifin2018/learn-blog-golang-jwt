@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"Blog/controllers"
+
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -13,6 +15,8 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 			"message": "pong",
 		})
 	})
+
+	r.POST("/users", controllers.PostUsers)
 
 	return r
 }
