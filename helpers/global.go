@@ -1,6 +1,8 @@
 package helpers
 
-import "os"
+import (
+	"os"
+)
 
 func Getenv(key, fallback string) string {
 	if value, err := os.LookupEnv(key); err {

@@ -3,6 +3,7 @@ package routes
 import (
 	"Blog/controllers"
 	"Blog/helpers"
+	"Blog/middlewares"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -20,6 +21,11 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 
 	r.POST("/register", controllers.RegisterUsers)
 	r.POST("/login", controllers.LoginUsers)
+
+	MiddlewarePrefixGroupPosts := r.Group("/posts")
+	MiddlewarePrefixGroupPosts.Use(middlewares.JwtAuthMiddleware())
+	MiddlewarePrefixGroupPosts.POST("/", controllers.CreatePosts)
+
 
 	return r
 }

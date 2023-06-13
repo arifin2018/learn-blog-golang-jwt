@@ -34,6 +34,7 @@ func LoginUsers(c *gin.Context)  {
 	db.Model(&user).Where("email = ?",LoginUser.Email).Take(&result)
 
 	delete(result, "id")
+	delete(result, "password")
 
 	c.JSON(http.StatusOK, gin.H{"message": "login success", "user": result})
 }
