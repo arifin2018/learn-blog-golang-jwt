@@ -14,7 +14,7 @@ type (
 		User PostUser `json:"user"`
 		Image []Image `json:"image" gorm:"many2many:Post_Images"`
 		Tag []Tag `json:"tag" gorm:"many2many:Post_Tags"`
-		Comment []Tag `json:"comment" gorm:"many2many:Post_Comments"`
+		Comment []Comment `json:"comment" gorm:"many2many:Post_Comments"`
 		Created_at time.Time `json:"created_at"`
 	}
 )
