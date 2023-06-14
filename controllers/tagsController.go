@@ -9,7 +9,11 @@ import (
 )
 
 func GetTags(c *gin.Context) {
-	
+	db := c.MustGet("db").(*gorm.DB)
+	var tags []models.TagPost
+	db.Preload("Post.User").Preload("Post.Image").Preload("Post.Tag").Preload("Post.Comment.User").Find(&tags)
+
+	c.JSON(http.StatusOK, gin.H{"data": tags})
 }
 
 func CreateTags(c *gin.Context)  {
