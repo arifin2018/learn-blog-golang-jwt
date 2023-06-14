@@ -27,5 +27,19 @@ func CreatePosts(c *gin.Context)  {
 	}
 	inputPost := models.Post{Content: Post.Content, User_id: int(user_id), Created_at: time.Now()}
 	db.Debug().Create(&inputPost)
+	if len(Post.Image_url) > 0 {
+		for _, v := range Post.Image_url {
+			ImageCreate := models.Image{Image_url: v}
+			db.Debug().Create(&ImageCreate)
+			PostImage := models.PostImage{PostId: inputPost.ID,ImageId: ImageCreate.ID}
+			db.Debug().Create(&PostImage)
+		}
+	}
+	if len(Post.TagId) > 0 {
+		for _, v := range Post.TagId {
+			PostTag := models.PostTag{PostId: inputPost.ID, TagId: v}
+			db.Debug().Create(&PostTag)
+		}
+	}
 	c.JSON(http.StatusOK, gin.H{"data": inputPost})
 }

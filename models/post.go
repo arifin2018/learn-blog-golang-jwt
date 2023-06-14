@@ -7,6 +7,7 @@ type (
 		ID	int `json:"id" form:"id" gorm:"primary_key"`
 		Content string `json:"content" form:"content" gorm:"type:text" binding:"required"`
 		User_id int `json:"user_id" form:"user_id" gorm:"not null"`
+		Image_url []string `json:"image_url" form:"image_url" gorm:"-"`
 		ImageId []int `json:"image_id" form:"image_id" gorm:"-"`
 		TagId []int `json:"tag_id" form:"tag_id" gorm:"-"`
 		CommentId []int `json:"comment_id" form:"comment_id" gorm:"-"`
