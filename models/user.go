@@ -20,7 +20,17 @@ type (
 		Email string `json:"email"`
 		Password string `json:"password"`
 	}
+
+    PostUser struct{
+		ID	int `json:"id" gorm:"primary_key"`
+		Email string `json:"email" gorm:"not null;index:unique;unique"`
+		Nickname string `json:"nickname" gorm:"not null"`
+	}
 )
+
+func (PostUser) TableName() string {
+	return "users"
+}
 
 func (user *User) SaveUser(db *gorm.DB) (*User, error) {
 	//turn password into hash
