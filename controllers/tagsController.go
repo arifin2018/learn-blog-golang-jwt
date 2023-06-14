@@ -8,6 +8,10 @@ import (
 	"gorm.io/gorm"
 )
 
+func GetTags(c *gin.Context) {
+	
+}
+
 func CreateTags(c *gin.Context)  {
 	db := c.MustGet("db").(*gorm.DB)
 	var tags models.Tag

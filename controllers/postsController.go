@@ -10,6 +10,14 @@ import (
 	"gorm.io/gorm"
 )
 
+func GetPosts(c *gin.Context) {
+	db := c.MustGet("db").(*gorm.DB)
+	var posts []models.GetPost
+
+	db.Preload("User").Preload("Image").Preload("Tag").Preload("Comment.User").Find(&posts)
+	c.JSON(http.StatusOK, gin.H{"data": posts})
+}
+
 func CreatePosts(c *gin.Context)  {
 	db := c.MustGet("db").(*gorm.DB)
 
@@ -25,7 +33,7 @@ func CreatePosts(c *gin.Context)  {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
 	}
-	inputPost := models.Post{Content: Post.Content, User_id: int(user_id), Created_at: time.Now()}
+	inputPost := models.Post{Title: Post.Title ,Content: Post.Content, User_id: int(user_id), Created_at: time.Now()}
 	db.Debug().Create(&inputPost)
 	if len(Post.Image_url) > 0 {
 		for _, v := range Post.Image_url {
