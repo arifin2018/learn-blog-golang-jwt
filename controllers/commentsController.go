@@ -11,6 +11,14 @@ import (
 	"gorm.io/gorm"
 )
 
+func GetComments(c *gin.Context) {
+	db := c.MustGet("db").(*gorm.DB)
+	var Comment []models.GetComment
+
+	db.Preload("User").Find(&Comment)
+	c.JSON(http.StatusOK, gin.H{"data": Comment})
+}
+
 func CreateComments(c *gin.Context)  {
 	db := c.MustGet("db").(*gorm.DB)
 	var Comments models.Comment
