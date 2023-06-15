@@ -3,6 +3,7 @@ package main
 import (
 	"Blog/config"
 	"Blog/docs"
+	"Blog/helpers"
 	"Blog/routes"
 )
 
@@ -20,7 +21,7 @@ func main()  {
 	docs.SwaggerInfo.Title = "Swagger Example API by Nur Arifin"
 	docs.SwaggerInfo.Description = "This is a sample server Blog."
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "localhost:8080"
+	docs.SwaggerInfo.Host = helpers.Getenv("APP_HOSTNAME", "localhost")
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
 	db := config.ConnectDB()
