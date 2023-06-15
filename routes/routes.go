@@ -2,8 +2,8 @@ package routes
 
 import (
 	"Blog/controllers"
-	"Blog/helpers"
 	"Blog/middlewares"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -19,8 +19,9 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
     })
 	
 	r.GET("/ping", func(c *gin.Context) {
-		helpers.ValidEmail("arifin@gmail.com")
+		c.JSON(http.StatusBadRequest, gin.H{"name": "arifin"})
 	})
+	
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.POST("/register", controllers.RegisterUsers)
