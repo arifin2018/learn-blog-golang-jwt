@@ -12,6 +12,7 @@ type (
 		ID	int `json:"id" gorm:"primary_key"`
 		Email string `json:"email" gorm:"not null;index:unique;unique"`
 		Nickname string `json:"nickname" gorm:"not null"`
+		ImageUrl string `json:"imageUrl" gorm:"not null"`
 		Password string `json:"password" gorm:"not null"`
 		Token string `json:"-" gorm:"type:text"`
 	}
@@ -24,6 +25,7 @@ type (
     RegisterUsers struct{
 		Email string `json:"email"`
 		Nickname string `json:"nickname" binding:"required"`
+		ImageUrl string `json:"imageUrl" binding:"required"`
 		Password string `json:"password" binding:"required"`
 	}
 
