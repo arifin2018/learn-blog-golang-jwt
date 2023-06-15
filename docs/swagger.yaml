@@ -149,6 +149,17 @@ definitions:
     required:
     - name
     type: object
+  models.TagPost:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      post:
+        items:
+          $ref: '#/definitions/models.GetPost'
+        type: array
+    type: object
   models.User:
     properties:
       email:
@@ -179,6 +190,40 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
 paths:
+  /Tags:
+    get:
+      description: Get a list of GetTags.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.TagPost'
+            type: array
+      summary: Get all GetTags.
+      tags:
+      - Tags
+    post:
+      description: Creating a new Tags.
+      parameters:
+      - description: the body to create a new Tags
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Tag'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      summary: Create New Tags.
+      tags:
+      - Tags
   /login:
     post:
       description: Login for user.

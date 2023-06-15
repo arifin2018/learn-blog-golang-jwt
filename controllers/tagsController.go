@@ -8,6 +8,13 @@ import (
 	"gorm.io/gorm"
 )
 
+// GetAllTags godoc
+// @Summary Get all GetTags.
+// @Description Get a list of GetTags.
+// @Tags Tags
+// @Produce json
+// @Success 200 {object} []models.TagPost
+// @Router /Tags [get]
 func GetTags(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
 	var tags []models.TagPost
@@ -16,6 +23,14 @@ func GetTags(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": tags})
 }
 
+// CreateTags godoc
+// @Summary Create New Tags.
+// @Description Creating a new Tags.
+// @Tags Tags
+// @Param Body body models.Tag true "the body to create a new Tags"
+// @Produce json
+// @Success 200 {object} models.Tag
+// @Router /Tags [post]
 func CreateTags(c *gin.Context)  {
 	db := c.MustGet("db").(*gorm.DB)
 	var tags models.Tag
