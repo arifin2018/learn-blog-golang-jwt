@@ -35,11 +35,14 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	MiddlewarePrefixGroupTags.Use(middlewares.JwtAuthMiddleware())
 	MiddlewarePrefixGroupTags.GET("/", controllers.GetTags)
 	MiddlewarePrefixGroupTags.POST("/", controllers.CreateTags)
+	MiddlewarePrefixGroupTags.PUT("/:id", controllers.UpdateTags)
+	MiddlewarePrefixGroupTags.DELETE("/:id", controllers.DeleteTags)
 
 	MiddlewarePrefixGroupComments := r.Group("/Comments")
 	MiddlewarePrefixGroupComments.Use(middlewares.JwtAuthMiddleware())
 	MiddlewarePrefixGroupComments.GET("/:id", controllers.GetComments)
 	MiddlewarePrefixGroupComments.POST("/:id", controllers.CreateComments)
+	MiddlewarePrefixGroupComments.DELETE("/:id", controllers.DeleteComments)
 
 	return r
 }

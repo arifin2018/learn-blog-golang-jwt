@@ -13,9 +13,9 @@ type (
 		TagId []int `json:"tag_id" form:"tag_id" gorm:"-"`
 		CommentId []int `json:"comment_id" form:"comment_id" gorm:"-"`
 		User PostUser `json:"user"`
-		Image []Image `json:"image" gorm:"many2many:Post_Images"`
-		Tag []Tag `json:"tag" gorm:"many2many:Post_Tags"`
-		Comment []Comment `json:"comment" gorm:"many2many:Post_Comments"`
+		Image []Image `json:"image" gorm:"many2many:Post_Images;constraint:OnDelete:CASCADE,OnUpdate:CASCADE"`
+		Tag []Tag `json:"tag" gorm:"many2many:Post_Tags;constraint:OnDelete:CASCADE,OnUpdate:CASCADE"`
+		Comment []Comment `json:"comment" gorm:"many2many:Post_Comments;constraint:OnDelete:CASCADE,OnUpdate:CASCADE"`
 		Created_at time.Time `json:"created_at"`
 	}
 

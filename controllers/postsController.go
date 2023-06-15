@@ -99,3 +99,17 @@ func CreatePosts(c *gin.Context)  {
 	tx.Commit()
 	c.JSON(http.StatusOK, gin.H{"data": inputPost})
 }
+
+
+// DeletePosts godoc
+// @Summary Delete a Post.
+// @Description Delete a Post.
+// @Tags Posts
+// @Produce json
+// @Success 200 {object} models.Post
+// @Router /posts/:id [delete]
+func DeletePosts(c *gin.Context)  {
+	db := c.MustGet("db").(*gorm.DB)
+	db.Delete(&models.Post{}, c.Param("id"))
+	c.JSON(http.StatusOK, gin.H{"data": []models.Post{}})
+}

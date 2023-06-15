@@ -17,8 +17,14 @@ type (
 	}
 
 	LoginUsers struct{
+		Email string `json:"email" binding:"required"`
+		Password string `json:"password" binding:"required"`
+	}
+
+    RegisterUsers struct{
 		Email string `json:"email"`
-		Password string `json:"password"`
+		Nickname string `json:"nickname" binding:"required"`
+		Password string `json:"password" binding:"required"`
 	}
 
     LoginRes struct{

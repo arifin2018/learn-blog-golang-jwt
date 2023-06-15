@@ -51,7 +51,7 @@ func LoginUsers(c *gin.Context)  {
 // @Summary Register user.
 // @Description Register for user.
 // @Tags Users
-// @Param Body body models.LoginUsers true "the body to register user"
+// @Param Body body models.RegisterUsers true "the body to register user"
 // @Produce json
 // @Success 200 {object} models.User
 // @Router /register [post]

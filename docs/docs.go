@@ -75,6 +75,24 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "delete": {
+                "description": "Delete a Comments.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Delete a Comments.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Comment"
+                        }
+                    }
+                }
             }
         },
         "/Tags": {
@@ -95,6 +113,24 @@ const docTemplate = `{
                             "items": {
                                 "$ref": "#/definitions/models.TagPost"
                             }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Delete a Tags.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Delete a Tags.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
                         }
                     }
                 }
@@ -212,6 +248,26 @@ const docTemplate = `{
                 }
             }
         },
+        "/posts/:id": {
+            "delete": {
+                "description": "Delete a Post.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Delete a Post.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Post"
+                        }
+                    }
+                }
+            }
+        },
         "/register": {
             "post": {
                 "description": "Register for user.",
@@ -229,7 +285,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.LoginUsers"
+                            "$ref": "#/definitions/models.RegisterUsers"
                         }
                     }
                 ],
@@ -357,6 +413,10 @@ const docTemplate = `{
         },
         "models.LoginUsers": {
             "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
             "properties": {
                 "email": {
                     "type": "string"
@@ -472,6 +532,24 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "nickname": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.RegisterUsers": {
+            "type": "object",
+            "required": [
+                "nickname",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "password": {
                     "type": "string"
                 }
             }

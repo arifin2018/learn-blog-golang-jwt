@@ -77,6 +77,9 @@ definitions:
         type: string
       password:
         type: string
+    required:
+    - email
+    - password
     type: object
   models.Post:
     properties:
@@ -151,6 +154,18 @@ definitions:
       nickname:
         type: string
     type: object
+  models.RegisterUsers:
+    properties:
+      email:
+        type: string
+      nickname:
+        type: string
+      password:
+        type: string
+    required:
+    - nickname
+    - password
+    type: object
   models.Tag:
     properties:
       id:
@@ -202,6 +217,18 @@ info:
   termsOfService: http://swagger.io/terms/
 paths:
   /Comments/:id:
+    delete:
+      description: Delete a Comments.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      summary: Delete a Comments.
+      tags:
+      - Comments
     get:
       description: Get a list of GetComments.
       produces:
@@ -269,6 +296,18 @@ paths:
       summary: Create New Tags.
       tags:
       - Tags
+    put:
+      description: Delete a Tags.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      summary: Delete a Tags.
+      tags:
+      - Tags
   /login:
     post:
       description: Login for user.
@@ -323,6 +362,19 @@ paths:
       summary: Create New Posts.
       tags:
       - Posts
+  /posts/:id:
+    delete:
+      description: Delete a Post.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Post'
+      summary: Delete a Post.
+      tags:
+      - Posts
   /register:
     post:
       description: Register for user.
@@ -332,7 +384,7 @@ paths:
         name: Body
         required: true
         schema:
-          $ref: '#/definitions/models.LoginUsers'
+          $ref: '#/definitions/models.RegisterUsers'
       produces:
       - application/json
       responses:

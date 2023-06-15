@@ -58,3 +58,16 @@ func CreateComments(c *gin.Context)  {
 
 	c.JSON(http.StatusOK, gin.H{"data": inputComment})
 }
+
+// DeleteComments godoc
+// @Summary Delete a Comments.
+// @Description Delete a Comments.
+// @Tags Comments
+// @Produce json
+// @Success 200 {object} models.Comment
+// @Router /Comments/:id [delete]
+func DeleteComments(c *gin.Context)  {
+	db := c.MustGet("db").(*gorm.DB)
+	db.Delete(&models.Comment{}, c.Param("id"))
+	c.JSON(http.StatusOK, gin.H{"data": []models.Comment{}})
+}

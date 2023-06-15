@@ -3,7 +3,7 @@ package models
 type (
 	Tag struct{
 		ID	int `json:"id" gorm:"primary_key"`
-		Name string `json:"name" form:"name" binding:"required"`
+		Name string `json:"name" form:"name" binding:"required" gorm:"index:idx_name,unique"`
 	}
 
 	TagPost struct{
