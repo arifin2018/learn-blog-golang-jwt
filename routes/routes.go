@@ -7,6 +7,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+
+	swaggerFiles "github.com/swaggo/files"     // swagger embed files
+	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
 )
 
 func SetupRouter(db *gorm.DB) *gin.Engine {
@@ -18,6 +21,7 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	r.GET("/ping", func(c *gin.Context) {
 		helpers.ValidEmail("arifin@gmail.com")
 	})
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.POST("/register", controllers.RegisterUsers)
 	r.POST("/login", controllers.LoginUsers)

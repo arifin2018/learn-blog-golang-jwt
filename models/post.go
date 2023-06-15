@@ -19,6 +19,13 @@ type (
 		Created_at time.Time `json:"created_at"`
 	}
 
+	PostReq struct{
+		Title string `json:"title" form:"title" gorm:"not null;type:varchar(200)" binding:"required"`
+		Content string `json:"content" form:"content" gorm:"type:text" binding:"required"`
+		Image_url []string `json:"image_url" form:"image_url" gorm:"-"`
+		TagId []int `json:"tag_id" form:"tag_id" gorm:"-"`
+	}
+
 	GetPost struct{
 		ID	int `json:"id" form:"id" gorm:"primary_key"`
 		Title string `json:"title" form:"title" gorm:"not null;type:varchar(200)" binding:"required"`

@@ -1,7 +1,291 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
     },
-    "paths": {}
+    "paths": {
+        "/posts": {
+            "get": {
+                "description": "Get a list of GetPosts.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "GetPosts"
+                ],
+                "summary": "Get all GetPosts.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.GetPost"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creating a new Posts.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Create New Posts.",
+                "parameters": [
+                    {
+                        "description": "the body to create a new Posts",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.PostReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Post"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Comment": {
+            "type": "object",
+            "required": [
+                "content"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.User"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.GetPost": {
+            "type": "object",
+            "required": [
+                "content",
+                "title"
+            ],
+            "properties": {
+                "comment": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Comment"
+                    }
+                },
+                "content": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Image"
+                    }
+                },
+                "tag": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Tag"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.PostUser"
+                }
+            }
+        },
+        "models.Image": {
+            "type": "object",
+            "required": [
+                "image_url"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "image_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Post": {
+            "type": "object",
+            "required": [
+                "content",
+                "title"
+            ],
+            "properties": {
+                "comment": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Comment"
+                    }
+                },
+                "comment_id": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "content": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Image"
+                    }
+                },
+                "image_id": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "image_url": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "tag": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Tag"
+                    }
+                },
+                "tag_id": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.PostUser"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.PostReq": {
+            "type": "object",
+            "required": [
+                "content",
+                "title"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "image_url": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "tag_id": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.PostUser": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "nickname": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Tag": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.User": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        }
+    }
 }

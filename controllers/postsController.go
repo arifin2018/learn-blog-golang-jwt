@@ -11,6 +11,13 @@ import (
 	"gorm.io/gorm"
 )
 
+// GetAllPosts godoc
+// @Summary Get all GetPosts.
+// @Description Get a list of GetPosts.
+// @Tags GetPosts
+// @Produce json
+// @Success 200 {object} []models.GetPost
+// @Router /posts [get]
 func GetPosts(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
 	var posts []models.GetPost
@@ -19,6 +26,14 @@ func GetPosts(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": posts})
 }
 
+// CreatePosts godoc
+// @Summary Create New Posts.
+// @Description Creating a new Posts.
+// @Tags Posts
+// @Param Body body models.PostReq true "the body to create a new Posts"
+// @Produce json
+// @Success 200 {object} models.Post
+// @Router /posts [post]
 func CreatePosts(c *gin.Context)  {
 	db := c.MustGet("db").(*gorm.DB)
 
