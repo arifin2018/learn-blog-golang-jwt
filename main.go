@@ -17,8 +17,8 @@ import (
 
 func main()  {
 	//programmatically set swagger info
-	docs.SwaggerInfo.Title = "Swagger Example API"
-	docs.SwaggerInfo.Description = "This is a sample server Movie."
+	docs.SwaggerInfo.Title = "Swagger Example API by Nur Arifin"
+	docs.SwaggerInfo.Description = "This is a sample server Blog."
 	docs.SwaggerInfo.Version = "1.0"
 	docs.SwaggerInfo.Host = "localhost:8080"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}

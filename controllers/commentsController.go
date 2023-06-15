@@ -11,6 +11,13 @@ import (
 	"gorm.io/gorm"
 )
 
+// GetAllComments godoc
+// @Summary Get all GetComments.
+// @Description Get a list of GetComments.
+// @Tags Comments
+// @Produce json
+// @Success 200 {object} []models.GetComment
+// @Router /Comments/:id [get]
 func GetComments(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
 	var Comment []models.GetComment
@@ -19,6 +26,14 @@ func GetComments(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": Comment})
 }
 
+// CreateComments godoc
+// @Summary Create New Comments.
+// @Description Creating a new Comments.
+// @Tags Comments
+// @Param Body body models.Comment true "the body to create a new Comment"
+// @Produce json
+// @Success 200 {object} models.Comment
+// @Router /Comments/:id [post]
 func CreateComments(c *gin.Context)  {
 	db := c.MustGet("db").(*gorm.DB)
 	var Comments models.Comment

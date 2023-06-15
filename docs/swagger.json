@@ -13,6 +13,58 @@
         }
     },
     "paths": {
+        "/Comments/:id": {
+            "get": {
+                "description": "Get a list of GetComments.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Get all GetComments.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.GetComment"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creating a new Comments.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Create New Comments.",
+                "parameters": [
+                    {
+                        "description": "the body to create a new Comment",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Comment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Comment"
+                        }
+                    }
+                }
+            }
+        },
         "/Tags": {
             "get": {
                 "description": "Get a list of GetTags.",
@@ -201,6 +253,23 @@
                 },
                 "user_id": {
                     "type": "integer"
+                }
+            }
+        },
+        "models.GetComment": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.PostUser"
                 }
             }
         },

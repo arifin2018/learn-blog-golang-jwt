@@ -14,6 +14,17 @@ definitions:
     required:
     - content
     type: object
+  models.GetComment:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      user:
+        $ref: '#/definitions/models.PostUser'
+    type: object
   models.GetPost:
     properties:
       comment:
@@ -190,6 +201,40 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
 paths:
+  /Comments/:id:
+    get:
+      description: Get a list of GetComments.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.GetComment'
+            type: array
+      summary: Get all GetComments.
+      tags:
+      - Comments
+    post:
+      description: Creating a new Comments.
+      parameters:
+      - description: the body to create a new Comment
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Comment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      summary: Create New Comments.
+      tags:
+      - Comments
   /Tags:
     get:
       description: Get a list of GetTags.
