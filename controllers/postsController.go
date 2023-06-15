@@ -14,7 +14,7 @@ import (
 // GetAllPosts godoc
 // @Summary Get all GetPosts.
 // @Description Get a list of GetPosts.
-// @Tags GetPosts
+// @Tags Posts
 // @Produce json
 // @Success 200 {object} []models.GetPost
 // @Router /posts [get]

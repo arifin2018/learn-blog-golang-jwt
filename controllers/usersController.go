@@ -9,6 +9,14 @@ import (
 	"gorm.io/gorm"
 )
 
+// Login godoc
+// @Summary Login user.
+// @Description Login for user.
+// @Tags Users
+// @Param Body body models.LoginUsers true "the body to Login user"
+// @Produce json
+// @Success 200 {object} models.LoginRes
+// @Router /login [post]
 func LoginUsers(c *gin.Context)  {
 	db := c.MustGet("db").(*gorm.DB)
 	var LoginUser models.LoginUsers
@@ -39,6 +47,14 @@ func LoginUsers(c *gin.Context)  {
 	c.JSON(http.StatusOK, gin.H{"message": "login success", "user": result})
 }
 
+// Register godoc
+// @Summary Register user.
+// @Description Register for user.
+// @Tags Users
+// @Param Body body models.LoginUsers true "the body to register user"
+// @Produce json
+// @Success 200 {object} models.User
+// @Router /register [post]
 func RegisterUsers(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
 	var inputUser models.User

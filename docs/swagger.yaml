@@ -51,6 +51,22 @@ definitions:
     required:
     - image_url
     type: object
+  models.LoginRes:
+    properties:
+      message:
+        type: string
+      user:
+        items:
+          $ref: '#/definitions/models.UserToken'
+        type: array
+    type: object
+  models.LoginUsers:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
   models.Post:
     properties:
       comment:
@@ -144,6 +160,15 @@ definitions:
       password:
         type: string
     type: object
+  models.UserToken:
+    properties:
+      email:
+        type: string
+      nickname:
+        type: string
+      token:
+        type: string
+    type: object
 info:
   contact:
     email: support@swagger.io
@@ -154,6 +179,26 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
 paths:
+  /login:
+    post:
+      description: Login for user.
+      parameters:
+      - description: the body to Login user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginUsers'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginRes'
+      summary: Login user.
+      tags:
+      - Users
   /posts:
     get:
       description: Get a list of GetPosts.
@@ -168,7 +213,7 @@ paths:
             type: array
       summary: Get all GetPosts.
       tags:
-      - GetPosts
+      - Posts
     post:
       description: Creating a new Posts.
       parameters:
@@ -188,4 +233,24 @@ paths:
       summary: Create New Posts.
       tags:
       - Posts
+  /register:
+    post:
+      description: Register for user.
+      parameters:
+      - description: the body to register user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginUsers'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Register user.
+      tags:
+      - Users
 swagger: "2.0"

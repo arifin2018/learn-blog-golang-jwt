@@ -21,6 +21,17 @@ type (
 		Password string `json:"password"`
 	}
 
+    LoginRes struct{
+		Message string
+        User    []UserToken
+	}
+
+    UserToken struct{
+        Email string `json:"email"`
+        Nickname string `json:"nickname"`
+        Token string `json:"token"`
+    }
+
     PostUser struct{
 		ID	int `json:"id" gorm:"primary_key"`
 		Email string `json:"email" gorm:"not null;index:unique;unique"`
