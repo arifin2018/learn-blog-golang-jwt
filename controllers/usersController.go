@@ -76,6 +76,7 @@ func RegisterUsers(c *gin.Context) {
 	user.Email = inputUser.Email
 	user.Nickname = inputUser.Nickname
 	user.Password = inputUser.Password
+	user.ImageUrl = inputUser.ImageUrl
 
 	_, err := user.SaveUser(db)
 

@@ -25,7 +25,27 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/Comments/:id": {
+        "/Tags": {
+            "put": {
+                "description": "Delete a Tags.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Delete a Tags.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                }
+            }
+        },
+        "/comments/:id": {
             "get": {
                 "description": "Get a list of GetComments.",
                 "produces": [
@@ -90,76 +110,6 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/models.Comment"
-                        }
-                    }
-                }
-            }
-        },
-        "/Tags": {
-            "get": {
-                "description": "Get a list of GetTags.",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Tags"
-                ],
-                "summary": "Get all GetTags.",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/models.TagPost"
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "Delete a Tags.",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Tags"
-                ],
-                "summary": "Delete a Tags.",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.Tag"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "Creating a new Tags.",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Tags"
-                ],
-                "summary": "Create New Tags.",
-                "parameters": [
-                    {
-                        "description": "the body to create a new Tags",
-                        "name": "Body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Tag"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.Tag"
                         }
                     }
                 }
@@ -294,6 +244,58 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/models.User"
+                        }
+                    }
+                }
+            }
+        },
+        "/tags": {
+            "get": {
+                "description": "Get a list of GetTags.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Get all GetTags.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.TagPost"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creating a new Tags.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Create New Tags.",
+                "parameters": [
+                    {
+                        "description": "the body to create a new Tags",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
                         }
                     }
                 }
@@ -539,11 +541,15 @@ const docTemplate = `{
         "models.RegisterUsers": {
             "type": "object",
             "required": [
+                "imageUrl",
                 "nickname",
                 "password"
             ],
             "properties": {
                 "email": {
+                    "type": "string"
+                },
+                "imageUrl": {
                     "type": "string"
                 },
                 "nickname": {
@@ -587,12 +593,20 @@ const docTemplate = `{
         },
         "models.User": {
             "type": "object",
+            "required": [
+                "imageUrl",
+                "nickname",
+                "password"
+            ],
             "properties": {
                 "email": {
                     "type": "string"
                 },
                 "id": {
                     "type": "integer"
+                },
+                "imageUrl": {
+                    "type": "string"
                 },
                 "nickname": {
                     "type": "string"

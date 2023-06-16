@@ -14,7 +14,7 @@ import (
 // @Tags Tags
 // @Produce json
 // @Success 200 {object} []models.TagPost
-// @Router /Tags [get]
+// @Router /tags [get]
 func GetTags(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
 	var tags []models.TagPost
@@ -30,7 +30,7 @@ func GetTags(c *gin.Context) {
 // @Param Body body models.Tag true "the body to create a new Tags"
 // @Produce json
 // @Success 200 {object} models.Tag
-// @Router /Tags [post]
+// @Router /tags [post]
 func CreateTags(c *gin.Context)  {
 	db := c.MustGet("db").(*gorm.DB)
 	var tags models.Tag

@@ -158,11 +158,14 @@ definitions:
     properties:
       email:
         type: string
+      imageUrl:
+        type: string
       nickname:
         type: string
       password:
         type: string
     required:
+    - imageUrl
     - nickname
     - password
     type: object
@@ -192,10 +195,16 @@ definitions:
         type: string
       id:
         type: integer
+      imageUrl:
+        type: string
       nickname:
         type: string
       password:
         type: string
+    required:
+    - imageUrl
+    - nickname
+    - password
     type: object
   models.UserToken:
     properties:
@@ -216,7 +225,20 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
 paths:
-  /Comments/:id:
+  /Tags:
+    put:
+      description: Delete a Tags.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      summary: Delete a Tags.
+      tags:
+      - Tags
+  /comments/:id:
     delete:
       description: Delete a Comments.
       produces:
@@ -262,52 +284,6 @@ paths:
       summary: Create New Comments.
       tags:
       - Comments
-  /Tags:
-    get:
-      description: Get a list of GetTags.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/models.TagPost'
-            type: array
-      summary: Get all GetTags.
-      tags:
-      - Tags
-    post:
-      description: Creating a new Tags.
-      parameters:
-      - description: the body to create a new Tags
-        in: body
-        name: Body
-        required: true
-        schema:
-          $ref: '#/definitions/models.Tag'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.Tag'
-      summary: Create New Tags.
-      tags:
-      - Tags
-    put:
-      description: Delete a Tags.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.Tag'
-      summary: Delete a Tags.
-      tags:
-      - Tags
   /login:
     post:
       description: Login for user.
@@ -395,4 +371,38 @@ paths:
       summary: Register user.
       tags:
       - Users
+  /tags:
+    get:
+      description: Get a list of GetTags.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.TagPost'
+            type: array
+      summary: Get all GetTags.
+      tags:
+      - Tags
+    post:
+      description: Creating a new Tags.
+      parameters:
+      - description: the body to create a new Tags
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Tag'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      summary: Create New Tags.
+      tags:
+      - Tags
 swagger: "2.0"

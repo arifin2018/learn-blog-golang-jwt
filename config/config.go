@@ -4,6 +4,7 @@ import (
 	"Blog/helpers"
 	"Blog/models"
 	"fmt"
+	"log"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -31,5 +32,9 @@ func ConnectDB() *gorm.DB {
 
 	db.AutoMigrate(&models.User{},&models.Post{}, &models.Tag{},&models.Image{},&models.Comment{})
 
+	if err := db.Migrator().DropColumn(&models.Comment{}, "image_url"); err != nil{
+		// Do whatever you want to do!
+		log.Print("ERROR: We expect the description column to be drop-able")
+	}
 	return db
 }

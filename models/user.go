@@ -11,9 +11,9 @@ type (
 	User struct{
 		ID	int `json:"id" gorm:"primary_key"`
 		Email string `json:"email" gorm:"not null;index:unique;unique"`
-		Nickname string `json:"nickname" gorm:"not null"`
-		ImageUrl string `json:"imageUrl" gorm:"not null"`
-		Password string `json:"password" gorm:"not null"`
+		Nickname string `json:"nickname" gorm:"not null" binding:"required"`
+		ImageUrl string `json:"imageUrl" gorm:"not null" binding:"required"`
+		Password string `json:"password" gorm:"not null" binding:"required"`
 		Token string `json:"-" gorm:"type:text"`
 	}
 
@@ -37,12 +37,14 @@ type (
     UserToken struct{
         Email string `json:"email"`
         Nickname string `json:"nickname"`
+		ImageUrl string `json:"imageUrl" binding:"required"`
         Token string `json:"token"`
     }
 
     PostUser struct{
 		ID	int `json:"id" gorm:"primary_key"`
 		Email string `json:"email" gorm:"not null;index:unique;unique"`
+		ImageUrl string `json:"imageUrl"`
 		Nickname string `json:"nickname" gorm:"not null"`
 	}
 )
