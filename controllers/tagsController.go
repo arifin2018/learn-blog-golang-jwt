@@ -51,7 +51,7 @@ func CreateTags(c *gin.Context)  {
 // @Param Body body models.Tag true "the body to update a new Tags"
 // @Produce json
 // @Success 200 {object} models.Tag
-// @Router /Tags [put]
+// @Router /Tags/:id [put]
 func UpdateTags(c *gin.Context)  {
 	db := c.MustGet("db").(*gorm.DB)
 	var tags models.Tag
@@ -71,7 +71,7 @@ func UpdateTags(c *gin.Context)  {
 // @Tags Tags
 // @Produce json
 // @Success 200 {object} models.Tag
-// @Router /Tags [put]
+// @Router /Tags/:id [delete]
 func DeleteTags(c *gin.Context)  {
 	db := c.MustGet("db").(*gorm.DB)
 	db.Delete(&models.Tag{}, c.Param("id"))

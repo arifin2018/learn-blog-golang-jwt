@@ -25,8 +25,37 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/Tags": {
+        "/Tags/:id": {
             "put": {
+                "description": "Update a Tags.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Update a Tags.",
+                "parameters": [
+                    {
+                        "description": "the body to update a new Tags",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                }
+            },
+            "delete": {
                 "description": "Delete a Tags.",
                 "produces": [
                     "application/json"
@@ -318,8 +347,20 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
+                "image": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Image"
+                    }
+                },
+                "image_url": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "user": {
-                    "$ref": "#/definitions/models.User"
+                    "$ref": "#/definitions/models.PostUser"
                 },
                 "user_id": {
                     "type": "integer"
@@ -337,6 +378,12 @@ const docTemplate = `{
                 },
                 "id": {
                     "type": "integer"
+                },
+                "image": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Image"
+                    }
                 },
                 "user": {
                     "$ref": "#/definitions/models.PostUser"
@@ -533,6 +580,9 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
+                "imageUrl": {
+                    "type": "string"
+                },
                 "nickname": {
                     "type": "string"
                 }
@@ -618,8 +668,14 @@ const docTemplate = `{
         },
         "models.UserToken": {
             "type": "object",
+            "required": [
+                "imageUrl"
+            ],
             "properties": {
                 "email": {
+                    "type": "string"
+                },
+                "imageUrl": {
                     "type": "string"
                 },
                 "nickname": {
